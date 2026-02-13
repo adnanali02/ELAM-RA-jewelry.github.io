@@ -12,7 +12,7 @@
 // API Configuration
 // =====================================================
 const API_CONFIG = {
-    BASE_URL: window.location.origin,
+    BASE_URL: 'https://elam-ra-backend.onrender.com',
     API_PREFIX: '/api',
     TIMEOUT: 30000,
     RETRY_ATTEMPTS: 3,
