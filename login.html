@@ -16,22 +16,25 @@
     <link rel="stylesheet" href="css/layout.css">
     
     <style>
+        /* تنسيقات ثابتة لضمان ظهور الخانات بشكل فخم */
         body {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: var(--color-bg-primary);
+            background-color: #111111; /* خلفية داكنة */
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
         }
         .login-card {
-            background: var(--color-bg-secondary);
+            background: #1a1a1a; /* بطاقة داكنة */
             padding: 3rem;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15); /* توهج ذهبي */
             width: 100%;
             max-width: 400px;
             text-align: center;
-            border: 1px solid var(--color-border);
+            border: 1px solid #333;
         }
         .login-logo {
             display: inline-flex;
@@ -40,8 +43,8 @@
             margin-bottom: 2rem;
             text-decoration: none;
         }
-        .login-logo .logo-icon { font-size: 2rem; }
-        .login-logo .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary); }
+        .login-logo .logo-icon { font-size: 2.5rem; }
+        .login-logo .logo-text { font-size: 1.5rem; font-weight: 700; color: #D4AF37; } /* لون ذهبي */
         .form-group {
             margin-bottom: 1.5rem;
             text-align: right;
@@ -49,20 +52,40 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--color-text-secondary);
+            color: #ffffff; /* نص أبيض صريح */
+            font-size: 0.95rem;
         }
         .form-control {
             width: 100%;
             padding: 0.8rem 1rem;
-            border: 1px solid var(--color-border);
+            border: 1px solid #444;
             border-radius: 6px;
-            background: var(--color-bg-primary);
-            color: var(--color-text-primary);
+            background: #222;
+            color: #ffffff; /* لون الكتابة داخل الخانة أبيض */
             font-family: inherit;
+            box-sizing: border-box; /* لمنع خروج الخانة عن الإطار */
         }
         .form-control:focus {
             outline: none;
-            border-color: var(--color-gold-main);
+            border-color: #D4AF37; /* حدود ذهبية عند الكتابة */
+            background: #2a2a2a;
+        }
+        .btn-login {
+            width: 100%;
+            margin-top: 1rem;
+            background-color: #D4AF37;
+            color: #000000;
+            border: none;
+            padding: 0.8rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #b5952f;
         }
         #error-msg {
             color: #ff4444;
@@ -71,6 +94,7 @@
             background: rgba(255, 68, 68, 0.1);
             padding: 0.8rem;
             border-radius: 6px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -95,7 +119,7 @@
                 <input type="password" id="password" class="form-control" required autocomplete="current-password">
             </div>
             
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">تسجيل الدخول</button>
+            <button type="submit" class="btn-login">تسجيل الدخول</button>
         </form>
     </div>
 
@@ -111,7 +135,6 @@
             const submitBtn = e.target.querySelector('button');
             
             try {
-                // إظهار حالة التحميل
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'جاري التحقق...';
                 errorDiv.style.display = 'none';
@@ -119,12 +142,10 @@
                 // استدعاء دالة تسجيل الدخول من api.js
                 const response = await AuthAPI.login(usernameInput, passwordInput);
                 
-                // إذا نجح الدخول، انتقل للوحة التحكم
                 if (response) {
                     window.location.href = 'admin.html';
                 }
             } catch (error) {
-                // في حالة الخطأ
                 errorDiv.textContent = error.message || 'خطأ في اسم المستخدم أو كلمة المرور';
                 errorDiv.style.display = 'block';
                 submitBtn.disabled = false;
