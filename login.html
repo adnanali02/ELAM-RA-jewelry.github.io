@@ -1,20 +1,136 @@
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico"> <link rel="stylesheet" href="css/variables.css"> <link rel="stylesheet" href="css/base.css">      <link rel="stylesheet" href="css/components.css"> <link rel="stylesheet" href="css/layout.css">     <script src="js/api.js"></script> ```
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | مصنوعات الأميرة</title>
+    
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--color-bg-primary);
+        }
+        .login-card {
+            background: var(--color-bg-secondary);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+        .login-logo .logo-icon { font-size: 2rem; }
+        .login-logo .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary); }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-secondary);
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: inherit;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-gold-main);
+        }
+        #error-msg {
+            color: #ff4444;
+            margin-bottom: 1rem;
+            display: none;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 0.8rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
 
----
+    <div class="login-card">
+        <a href="index.html" class="login-logo">
+            <div class="logo-icon">👑</div>
+            <span class="logo-text">مصنوعات الأميرة</span>
+        </a>
+        
+        <div id="error-msg">بيانات الدخول غير صحيحة</div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label class="form-label">اسم المستخدم</label>
+                <input type="text" id="username" class="form-control" required autocomplete="username">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" id="password" class="form-control" required autocomplete="current-password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">تسجيل الدخول</button>
+        </form>
+    </div>
 
-### 2. الكود المحدث لملف `admin.html`
-بالإضافة لتعديل مسارات الملفات الخارجية، قمت بتعديل الروابط الداخلية (Internal Links) لتعمل بشكل صحيح في الهيكلية الجديدة.
-
-```html
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/layout.css">
-
-<a href="index.html" class="logo"> <div class="logo-icon">👑</div>
-    <span class="logo-text">مصنوعات الأميرة</span>
-</a>
-
-<script src="js/api.js"></script>
+    <script src="js/api.js"></script>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-msg');
+            const submitBtn = e.target.querySelector('button');
+            
+            try {
+                // إظهار حالة التحميل
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'جاري التحقق...';
+                errorDiv.style.display = 'none';
+                
+                // استدعاء دالة تسجيل الدخول من api.js
+                const response = await AuthAPI.login(usernameInput, passwordInput);
+                
+                // إذا نجح الدخول، انتقل للوحة التحكم
+                if (response) {
+                    window.location.href = 'admin.html';
+                }
+            } catch (error) {
+                // في حالة الخطأ
+                errorDiv.textContent = error.message || 'خطأ في اسم المستخدم أو كلمة المرور';
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'تسجيل الدخول';
+            }
+        });
+    </script>
+</body>
+</html>
