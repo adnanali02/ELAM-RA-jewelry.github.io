@@ -32,10 +32,13 @@ class GoldMarketApp {
         try {
             console.log('Initializing Gold Market App...');
             
+            // ✅ تفعيل الأزرار أولاً لكي تعمل دائماً! (هذا هو الحل)
+            this.attachEventListeners();
+            
             // تهيئة الساعة
             this.initClock();
             
-            // جلب البيانات الأولية
+            // جلب البيانات الأولية (إذا فشل، ستبقى الأزرار تعمل)
             await this.fetchInitialData();
             
             // عرض البيانات
@@ -43,9 +46,6 @@ class GoldMarketApp {
             
             // بدء التحديثات التلقائية
             this.startAutoUpdate();
-            
-            // إضافة مستمعي الأحداث
-            this.attachEventListeners();
             
             console.log('App initialized successfully');
         } catch (error) {
