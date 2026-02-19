@@ -333,7 +333,7 @@ class GoldMarketApp {
         const adminBtn = document.getElementById('admin-btn');
         if (adminBtn) {
             adminBtn.addEventListener('click', () => {
-                window.location.href = '/login';
+                window.location.href = '/login.html';
             });
         }
 
