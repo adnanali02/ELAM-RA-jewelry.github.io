@@ -6,8 +6,6 @@
     <title>تسجيل الدخول | مصنوعات الأميرة</title>
     
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/variables.css">
@@ -16,76 +14,70 @@
     <link rel="stylesheet" href="css/layout.css">
     
     <style>
-        /* تنسيقات ثابتة لضمان ظهور الخانات بشكل فخم */
+        /* فرض التنسيقات بالقوة القاهرة !important */
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #111111; /* خلفية داكنة */
-            margin: 0;
-            font-family: 'Cairo', sans-serif;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
+            background-color: #111111 !important; 
+            margin: 0 !important;
         }
         .login-card {
-            background: #1a1a1a; /* بطاقة داكنة */
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.15); /* توهج ذهبي */
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            border: 1px solid #333;
+            background-color: #1a1a1a !important; 
+            padding: 3rem !important;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2) !important; 
+            width: 100% !important;
+            max-width: 400px !important;
+            text-align: center !important;
+            border: 1px solid #D4AF37 !important; /* حد ذهبي للبطاقة */
         }
         .login-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            text-decoration: none;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            margin-bottom: 2rem !important;
+            text-decoration: none !important;
         }
-        .login-logo .logo-icon { font-size: 2.5rem; }
-        .login-logo .logo-text { font-size: 1.5rem; font-weight: 700; color: #D4AF37; } /* لون ذهبي */
+        .login-logo .logo-icon { font-size: 2.5rem !important; }
+        .login-logo .logo-text { font-size: 1.5rem !important; font-weight: 700 !important; color: #D4AF37 !important; } 
         .form-group {
-            margin-bottom: 1.5rem;
-            text-align: right;
+            margin-bottom: 1.5rem !important;
+            text-align: right !important;
         }
         .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #ffffff; /* نص أبيض صريح */
-            font-size: 0.95rem;
+            display: block !important;
+            margin-bottom: 0.5rem !important;
+            color: #ffffff !important; 
+            font-size: 1rem !important;
+            font-weight: bold !important;
         }
         .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #444;
-            border-radius: 6px;
-            background: #222;
-            color: #ffffff; /* لون الكتابة داخل الخانة أبيض */
-            font-family: inherit;
-            box-sizing: border-box; /* لمنع خروج الخانة عن الإطار */
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #D4AF37; /* حدود ذهبية عند الكتابة */
-            background: #2a2a2a;
+            width: 100% !important;
+            padding: 1rem !important;
+            border: 2px solid #D4AF37 !important; /* حد ذهبي عريض وواضح */
+            border-radius: 6px !important;
+            background-color: #2a2a2a !important; /* خلفية رمادية داكنة */
+            color: #ffffff !important; /* نص أبيض */
+            font-size: 1rem !important;
+            box-sizing: border-box !important;
+            opacity: 1 !important; /* إلغاء أي شفافية */
+            visibility: visible !important;
         }
         .btn-login {
-            width: 100%;
-            margin-top: 1rem;
-            background-color: #D4AF37;
-            color: #000000;
-            border: none;
-            padding: 0.8rem;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        .btn-login:hover {
-            background-color: #b5952f;
+            width: 100% !important;
+            margin-top: 1rem !important;
+            background-color: #D4AF37 !important;
+            color: #000000 !important;
+            border: none !important;
+            padding: 1rem !important;
+            font-weight: bold !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            font-size: 1.1rem !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
         #error-msg {
             color: #ff4444;
@@ -94,7 +86,6 @@
             background: rgba(255, 68, 68, 0.1);
             padding: 0.8rem;
             border-radius: 6px;
-            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -111,12 +102,12 @@
         <form id="login-form">
             <div class="form-group">
                 <label class="form-label">اسم المستخدم</label>
-                <input type="text" id="username" class="form-control" required autocomplete="username">
+                <input type="text" id="username" class="form-control" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">كلمة المرور</label>
-                <input type="password" id="password" class="form-control" required autocomplete="current-password">
+                <input type="password" id="password" class="form-control" required>
             </div>
             
             <button type="submit" class="btn-login">تسجيل الدخول</button>
@@ -124,11 +115,9 @@
     </div>
 
     <script src="js/api.js"></script>
-    
     <script>
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const usernameInput = document.getElementById('username').value;
             const passwordInput = document.getElementById('password').value;
             const errorDiv = document.getElementById('error-msg');
@@ -139,12 +128,8 @@
                 submitBtn.textContent = 'جاري التحقق...';
                 errorDiv.style.display = 'none';
                 
-                // استدعاء دالة تسجيل الدخول من api.js
                 const response = await AuthAPI.login(usernameInput, passwordInput);
-                
-                if (response) {
-                    window.location.href = 'admin.html';
-                }
+                if (response) window.location.href = 'admin.html';
             } catch (error) {
                 errorDiv.textContent = error.message || 'خطأ في اسم المستخدم أو كلمة المرور';
                 errorDiv.style.display = 'block';
